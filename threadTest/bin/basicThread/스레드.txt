@@ -1,0 +1,11 @@
+/*
+ Thread를 사용하는 방법
+  
+ 1) Thread 클래스를 상속받은 class의 객체를 생성한 후 이 객체의 start() 메서드를 호출
+  
+ 2-1) Runnable 인터페이스를 구현한 class를 작성한 후 이 class의 객체를 생성
+    이 객체를 Thread객체를 생성할 때 생성자의 인자로 넣어서 생성
+    이 때 생성된 Thread객체의 start() 메소드를 호출
+ 
+ 2-2) Runnable 인터페이스를 람다로 작성
+ */
