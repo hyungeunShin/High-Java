@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="member">
+	<insert id="insertMember" parameterType="memvo">
+		insert into mymember (mem_id, mem_pass, mem_name, mem_tel, mem_addr) 
+		values (#{mem_id}, #{mem_pass}, #{mem_name}, #{mem_tel}, #{mem_addr})
+	</insert>
+	
+	<delete id="deleteMember" parameterType="String">
+		delete from mymember where mem_id = #{mem_id}
+	</delete>
+	
+	<update id="updateMember" parameterType="memvo">
+		update mymember set mem_pass = #{mem_pass}, mem_name = #{mem_name},
+		 mem_tel = #{mem_tel}, mem_addr = #{mem_addr} where mem_id = #{mem_id}
+	</update>
+	
+	<select id="getAllMember" resultType="memvo">
+		select * from mymember
+	</select>
+	
+	<select id="getMemberCount" parameterType="String" resultType="int">
+		select count(*) from mymember where mem_id = #{mem_id}
+	</select>
+	
+	<!--
+	  Map을 받으면 처리할 변수명은 Map의 'Key값'
+	  
+	  파라미터로 가져온 값을 '컬럼명' 자리에서 쓸때는 $()
+	  #() : PreparedStatement ==> ''이 자동으로 붙음
+	  $() : Statement         ==> X
+	  
+	-->
+	
+	<update id="update2" parameterType="map">
+		update mymember set ${field} = #{data} where mem_id = #{memId} 
+	</update>
+	
+	<update id="update3" parameterType="map">
+		<!-- update mymember set ${str} where mem_id = #{mem_id} -->   
+		                        
+		update mymember
+			<set>
+				<if test="mem_pass != null">mem_pass = #{mem_pass},</if>
+				<if test="mem_name != null">mem_name = #{mem_name},</if>
+				<if test="mem_tel != null">mem_tel = #{mem_tel},</if>
+				<if test="mem_addr != null">mem_addr = #{mem_addr}</if>
+			</set>
+		where mem_id = #{memId}
+	</update> 
+</mapper>
