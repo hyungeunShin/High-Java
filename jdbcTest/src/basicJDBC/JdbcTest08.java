@@ -29,10 +29,9 @@ public class JdbcTest08 implements Runnable {
         String sql = "INSERT INTO 고객(고객번호, 고객명) select max(to_number(고객번호)) + 1, '홍길동' from 고객";
 
         try (Connection con = DriverManager.getConnection(url, userid, passwd);
-             PreparedStatement st = con.prepareStatement(sql)) {
+            PreparedStatement st = con.prepareStatement(sql)) {
 
             st.executeUpdate();
-
         } catch (SQLException e) {
         	if(e instanceof SQLIntegrityConstraintViolationException) {
         		throw e;

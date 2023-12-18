@@ -45,15 +45,15 @@ public class JdbcTest07 {
         		}
         		
         		//DB Insert
-                //int insert = insert(dbDataList);
-                //System.out.println(insert + "개의 행이 등록됨");
+            	int insert = insert(dbDataList);
+                System.out.println(insert + "개의 행이 등록됨");
                 
                 //파일 삭제
-    			//String deleteFile = deleteFile("C:/testA/test1.csv");
-    			//System.out.println(deleteFile);
+    			String deleteFile = deleteFile("C:/testA/test1.csv");
+    			System.out.println(deleteFile);
                 
                 //.csv파일
-                //wrtieFile("C:/testA", getNowFileName(), dbDataList);
+                wrtieFile("C:/testA", getNowFileName(), dbDataList);
         	} 
         } catch(Exception e) {
             e.printStackTrace();
@@ -64,8 +64,8 @@ public class JdbcTest07 {
 		Class.forName("org.postgresql.Driver");
 		
 		String url  	= "";
-        String user     = "";
-        String password = "";
+    	String user     = "";
+    	String password = "";
 		String query 	= "SELECT * FROM public.pas_code";
 		
 		List<Map<String, Object>> resultList = new ArrayList<>();
@@ -164,8 +164,6 @@ public class JdbcTest07 {
 				stmt.addBatch();
 				stmt.clearParameters();
 				
-				//addBatch할 때 너무 많은 쿼리문을 메모리에 올리면
-				//OutOfMemory 발생
 				if((i % 100) == 0) {
 					stmt.executeBatch();
 					stmt.clearBatch();
@@ -218,7 +216,7 @@ public class JdbcTest07 {
 		if(file.exists()) {
     		if(file.delete()) {
     			return "파일삭제 성공";
-    		}else{
+    		} else {
     			return "파일삭제 실패";
     		}
     	} else {
